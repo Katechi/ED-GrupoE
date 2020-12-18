@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=+, initial-scale=1.0">
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <title>Calidad de Aire</title>
+  
+
+  
+<script>
+  $(document).ready(Principal)
+
+
+function Principal(){
+            $("#boton1").click(Mapa);
+          
+        }
+
+        
+            function Mapa(){ 
+            
+            var map = L.map('Mapa').setView([-38.732689,-72.645523], 13);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+L.marker({{fecha}}).addTo(map)
+    .bindPopup('Fecha !')
+    .openPopup();
+
+var ruta = L.polyline({{ltln}}, {color: 'green'});
+ruta.addTo(map);
+
+
+
+            }
+</script>
+<style>
+  .Mapa{
+      height: 380px;
+      width: 100%;
+      background-color: mediumturquoise;
+  }
+  .Velocidad{
+      height: 380px;
+      width: 100%;
+      background-color: mediumspringgreen;
+  }
+  h1{
+      text-align: center;
+  }
+</style>
+
+
+</head>
+<body>
+
+    
+      <h3 style="color: aliceblue;">Ruta vehiculo</h3>
+     
+      <div class="form-group bgdiv rounded">
+                            
+        <form  method="POST" action="{{url_for('carga')}}">
+         id<input required type="text" name="id" class="search-query">
+          <br>
+
+          <button type="submit" id="boton1">buscar</button>
+
+          <div id="Mapa" class="Mapa"></div>
+          
+        </form>
+        
+     
+
+      
+      
+  </div>
+  </div>
+</body>
+
+</html>
